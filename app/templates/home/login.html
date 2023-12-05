@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block app_content %}
+    <div class="text-center ">
+        <h1>Вхід до системи</h1>
+    </div>
+
+    <div class="container md-6">
+        <form method="post">
+            {{ form.csrf_token() }}
+            {{ render_form(form) }}
+        </form>
+    </div>
+{% endblock %}

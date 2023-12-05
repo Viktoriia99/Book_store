@@ -1,0 +1,145 @@
+{% block styles %}
+    <link rel="icon" href="{{ url_for('icon') }}">
+    {{ bootstrap.load_css() }}
+{% endblock %}
+
+{% block title %}
+<title>
+    {% if title %}
+        {{ title }}
+    {% else %}
+        Book Shop
+    {% endif %}
+</title>
+{% endblock %}
+
+
+
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">Книжковий магазин</a>
+
+            <div class="navbar-nav">
+                <a class="nav-link" href="{{ url_for('index') }}">Головна</a>
+                <a class="nav-link" href="{{ url_for('books') }}">Книги</a>
+                <a class="nav-link" href="{{ url_for('about') }}">Про сайт</a>
+                <a class="nav-link" href="{{ url_for('about') }}">Контакти</a>
+<!--                <a class="nav-link" href="{# {{ url_for('help') }} #}">Довідка</a>-->
+<!--                <a class="nav-link" href="{# {{ url_for('agreement') }} #}">Угода користувача</a>-->
+<!--                <a class="nav-link" href="{# {{ url_for('privacy_policy') }} #}">Політика конфіденційності</a>-->
+                <a class="nav-link" href="{{ url_for('login') }}">Увійти</a>
+                <a class="nav-link" href="{{ url_for('login') }}">Зареєструватися</a>
+<!--                <a class="nav-link" href="{# url_for('logout') #}">Вийти</a>-->
+            </div>
+
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    {% block app_content %}{% endblock %}
+
+    {% block cookie %}
+        <footer class="footer fixed-bottom text-white bg-dark py-3">
+            <div class="text-center py-3">
+                Цей сайт використовує файли cookies та сервіси збору технічних даних відвідувачів (дані про IP-адресу, міжцезнахлдження та ін.) для забезпечення роботоздатності та покращення якості обслуговування. Продовжуючи використовувати наш сайт, ви автоматично погоджуєтесь з використанням даних технологій.
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm text-right">
+                        <a class="btn btn-success" id="cookie_close" href="#close">Погодитись</a>
+                    </div>
+
+                    <div class="col-sm text-left">
+                        <a class="btn btn-info" href="#politika">Політика конфіденційності</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    {% endblock %}
+{% endblock %}
+
+
+
+
+
+{% block footer %}
+<footer class="bg-dark text-light py-3 mt-4">
+    <div class="container widget">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>Книжковий магазин</h5>
+                <p>У нас ви знайдете книги на будь-який смак!</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Посилання</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link text-light" href="{{ url_for('index') }}">Головна</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="{{ url_for('books') }}">Книги</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="{{ url_for('about') }}">Про сайт</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="{{ url_for('about') }}">Контакти</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5>Додатково</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link text-light" href="{# url_for('help') #}">Довідка</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="{# url_for('agreement') #}">Угода користувача</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="{# url_for('privacy_policy') #}">Політика конфіденційності</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center py-3">
+            <p>&copy; 2023 Книгирня. Всі права захищені.</p>
+        </div>
+    </div>
+</footer>
+{% endblock %}
+
+
+
+{% block scriptss %}
+	<link href='{{ url_for("static", filename="css/style.css") }}' rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='icon.ico') }}">
+{% endblock %}
+
+{% block scripts %}
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+    <script src="{{ url_for('static', filename='js/cookie.js') }}"></script>
+    <script type="text/javascript">
+
+        let cookiecook = getCookie("cookiecook"),
+            cookiewin = document.getElementsByTagName('footer')[0];
+
+        if (cookiecook != "no") {
+
+            cookiewin.style.display="block";
+
+            document.getElementById("cookie_close").addEventListener("click", function(){
+                cookiewin.style.display="none";
+
+                let date = new Date;
+                date.setMinutes(date.getMinutes() + 145);
+                document.cookie = "cookiecook=no; path=/; expires=" + date.toUTCString();
+            });
+        } else {
+            cookiewin.style.display="none";
+        }
+    </script>
+{% endblock %}

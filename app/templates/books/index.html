@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block app_content %}
+    {% include 'books/_basket.html' %}
+    {% include 'books/_last_viewing_book.html' %}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.form-control.input-sm').on('change', function (e) {
+                e.preventDefault();
+                let value = parseInt($(this).val());
+                if (isNaN(value)) {
+                    value = 0;
+                    $(this).val(0);
+                }
+
+                let $price = $(this).parent('td').prev();
+                let $total = $(this).parent('td').next();
+
+                let price = parseFloat($price.text().slice(1));
+
+                price = price * value;
+                price = price.toFixed(2);
+                $total.text('$' + price);
+
+                let sum = 0;
+                let elems = $("td.text-success");
+                let elemsTotal = elems.length;
+                for(let i=0; i < elemsTotal; ++i) {
+                    sum += parseFloat($(elems[i]).text().slice(1))
+                }
+                $('#total-price').text('$' + sum.toFixed(2));
+            });
+        });
+    </script>
+{% endblock %}

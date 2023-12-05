@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block app_content %}
+    <div class="jumbotron text-center">
+        <h1 class="jumbotron-heading">Класичні книги!</h1>
+        <p class="lead text-muted">Заходьте, дивіться, обирайте та табовляйте крищі класичні витвори від різних авторів та у будь-яких жанрах!</p>
+        <a class="btn btn-info my-2" href="{{ url_for('books') }}">Перейти до каталогу</a>
+    </div>
+    <div class="text-center">
+        <img class="card-img-top" style="max-height: 800px; max-width: 800px;" src="https://img.freepik.com/premium-photo/a-row-of-books-with-the-title-the-book-on-the-front_771335-53176.jpg?w=996" alt="книги">
+    </div>
+
+{% endblock %}

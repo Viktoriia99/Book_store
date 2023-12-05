@@ -1,0 +1,35 @@
+{% if last_viewing_books %}
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <p class="lead">Останні переглянуті книги</p>
+    </div>
+
+    <div class="container">
+        <div class="row card-deck mb-3 text-center">
+            {% for last_viewing_book in last_viewing_books %}
+                <div class="col">
+                    <div class="card mb-4 ">
+                        <div class="card-header">
+                            <h2 class="my-0 font-weight-normal">{{ last_viewing_book['bookTitle'] }}</h2>
+                        </div>
+
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">{{ last_viewing_book['bookAuthor'] }}</h1>
+                            <img class="img-responsive" style="max-width: 256px; max-height: 256px;"
+                                 src="{% if last_viewing_book['imageUrlL'] %}
+                                          {{ last_viewing_book['imageUrlL'] }}
+                                      {% else %}
+                                          {{ url_for('static', filename='img/default_book_cover.jpg') }}
+                                      {% endif %}"
+                                 alt="">
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li><i>{{ last_viewing_book['count'] }}</i></li>
+                                <li><i>${{ last_viewing_book['price'] }}</i></li>
+                            </ul>
+                            <a href="{{ url_for('book', id=last_viewing_book.id) }}" class="btn btn-lg btn-block btn-outline-primary">Детальніше</a>
+                        </div>
+                    </div>
+                </div>
+          {% endfor %}
+      </div>
+    </div>
+{% endif %}
